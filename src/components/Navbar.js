@@ -5,7 +5,13 @@ export default function Navbar(props) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-warning">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
+        <Link
+          onClick={() => {
+            props.active("home");
+          }}
+          className="navbar-brand"
+          to="/"
+        >
           Text-Utils
         </Link>
         <button
@@ -22,12 +28,27 @@ export default function Navbar(props) {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" to="/">
+              <Link
+                id="home"
+                onClick={() => {
+                  props.active("home");
+                }}
+                className="nav-link text-dark"
+                aria-current="page"
+                to="/"
+              >
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/about">
+              <Link
+                onClick={() => {
+                  props.active("about");
+                }}
+                id="about"
+                className="nav-link"
+                to="/about"
+              >
                 About
               </Link>
             </li>
@@ -37,7 +58,10 @@ export default function Navbar(props) {
               className="form-check-input"
               type="checkbox"
               id="mode"
-              onChange={props.toggleMode}
+              onChange={() => {
+                props.toggleMode();
+                props.showAlert("success", "Dark mode enabled");
+              }}
             />
             <label className="form-check-label text-dark" htmlFor="mode">
               Dark Mode
