@@ -14,10 +14,12 @@ function App() {
       document.querySelector("body").classList.add("bg-dark");
       document.querySelector("body").classList.add("text-light");
       setMode("dark");
+      showAlert("success", "Dark mode enabled");
     } else {
-      setMode("light");
       document.querySelector("body").classList.remove("bg-dark");
       document.querySelector("body").classList.remove("text-light");
+      setMode("light");
+      showAlert("success", "Dark mode disabled");
     }
   };
 
@@ -30,7 +32,6 @@ function App() {
       document.querySelector("#about").classList.add("text-dark");
       document.querySelector("#home").classList.remove("text-dark");
     }
-    console.log(document.querySelector("#home"));
   };
 
   const showAlert = (type, msg) => {
@@ -50,13 +51,12 @@ function App() {
           mode={mode}
           active={active}
           alert={alert}
-          showAlert={showAlert}
         />
         <Alert alert={alert} />
         <div className="container my-3">
           <Switch>
             <Route exact path="/">
-              <Home mode={mode} showAlert={showAlert} />
+              <Home mode={mode} />
             </Route>
             <Route exact path="/about">
               <About mode={mode} />

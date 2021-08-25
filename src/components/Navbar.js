@@ -60,7 +60,6 @@ export default function Navbar(props) {
               id="mode"
               onChange={() => {
                 props.toggleMode();
-                props.showAlert("success", "Dark mode enabled");
               }}
             />
             <label className="form-check-label text-dark" htmlFor="mode">
