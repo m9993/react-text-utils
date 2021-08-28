@@ -4,10 +4,13 @@ import About from "./components/About";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import React, { useState } from "react";
 import Alert from "./components/Alert";
+import Buttons from "./components/Buttons";
+import TextCalculations from "./components/TextCalculations";
 
 function App() {
   const [mode, setMode] = useState("light");
   const [alert, setAlert] = useState("");
+  const [text, setText] = useState("");
 
   const toggleMode = () => {
     if (mode === "light") {
@@ -43,23 +46,27 @@ function App() {
       setAlert(null);
     }, 1000);
   };
+
   return (
     <>
       <Router>
-        <Navbar
-          toggleMode={toggleMode}
-          mode={mode}
-          active={active}
-          alert={alert}
-        />
+        <Navbar toggleMode={toggleMode} active={active} />
         <Alert alert={alert} />
         <div className="container my-3">
           <Switch>
             <Route exact path="/">
-              <Home mode={mode} />
+              <Home mode={mode} text={text} setText={setText} />
+              <Buttons text={text} setText={setText} showAlert={showAlert} />
+              <TextCalculations text={text} />
+              <div className="small px-3 border-start border-4 rounded-3 border-warning">
+                <h5>Preview</h5>
+                <p className="my-0">
+                  {text === "" ? "Nothing to preview" : text}
+                </p>
+              </div>
             </Route>
             <Route exact path="/about">
-              <About mode={mode} />
+              <About />
             </Route>
           </Switch>
         </div>

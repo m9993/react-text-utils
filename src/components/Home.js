@@ -15,6 +15,10 @@ export default function Home(props) {
             ? { backgroundColor: "#0d6efd0a", color: "white" }
             : { backgroundColor: "white", color: "black" }
         }
+        onChange={(e) => {
+          props.setText(e.target.value);
+        }}
+        value={props.text}
       ></textarea>
     </div>
   );
